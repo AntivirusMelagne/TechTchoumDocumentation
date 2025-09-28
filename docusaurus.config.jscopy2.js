@@ -11,11 +11,11 @@ const config = {
     v4: true,
   },
 
-  url: 'https://AntivirusMelagne.github.io', // ton GitHub Pages
+  url: 'https://thetchoumconsulting.com/', // 👉 remplace par ton vrai domaine ou GitHub Pages
   baseUrl: '/TechTchoumDocumentation/',
 
-  organizationName: 'AntivirusMelagne', // ✅ juste ton pseudo GitHub
-  projectName: 'TechTchoumDocumentation', // ✅ ton repo
+  organizationName: 'AntivirusMelagne', // 👉 remplace par ton compte GitHub
+  projectName: 'TechTchoumDocumentation', // 👉 remplace par ton repo
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -30,12 +30,12 @@ const config = {
       'classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: './sidebars.js',
           editUrl: 'https://github.com/AntivirusMelagne/TechTchoumDocumentation/tree/main/',
         },
-        blog: false,
+        blog: false, // 👉 désactive le blog si tu n’en veux pas
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: './src/css/custom.css',
         },
       },
     ],
@@ -47,7 +47,7 @@ const config = {
       title: 'Next.js Docs',
       logo: {
         alt: 'Logo Next.js',
-        src: 'img/TTClogo.png',
+        src: 'img/TTClogo.png', // 👉 change si tu as ton propre logo
       },
       items: [
         {
