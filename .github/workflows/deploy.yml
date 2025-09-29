@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: write   # ✅ autorise GitHub Actions à écrire dans ton dépôt
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
