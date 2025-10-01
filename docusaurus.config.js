@@ -1,21 +1,28 @@
 // @ts-check
 import {themes as prismThemes} from 'prism-react-renderer';
 
+// ⬇️ valeurs par défaut (GitHub Pages du dépôt actuel)
+// Elles seront remplacées par les variables d'environnement dans le workflow
+const siteUrl = process.env.SITE_URL ?? 'https://antivirusmelagne.github.io';
+const baseUrl = process.env.BASE_URL ?? '/TechTchoumDocumentation/';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Documentation Next.js',
   tagline: 'Apprendre Next.js étape par étape 🚀',
   favicon: 'img/favicon.ico',
 
-  future: {
-    v4: true,
-  },
+  future: { v4: true },
 
-  url: 'https://AntivirusMelagne.github.io', // ton GitHub Pages
-  baseUrl: '/TechTchoumDocumentation/',
+  // ⬇️ rendu public : URL et baseUrl dynamiques
+  url: siteUrl,
+  baseUrl: baseUrl,
 
-  organizationName: 'AntivirusMelagne', // ✅ juste ton pseudo GitHub
-  projectName: 'TechTchoumDocumentation', // ✅ ton repo
+  // ⬇️ recommandé pour GitHub Pages (évite les redirections bizarres)
+  trailingSlash: true,
+
+  organizationName: 'AntivirusMelagne',   // compte GitHub
+  projectName: 'TechTchoumDocumentation', // nom du dépôt
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -45,22 +52,10 @@ const config = {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Next.js Docs',
-      logo: {
-        alt: 'Logo Next.js',
-        src: 'img/TTClogo.png',
-      },
+      logo: { alt: 'Logo Next.js', src: 'img/TTClogo.png' },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Documentation',
-        },
-        {
-          href: 'https://github.com/AntivirusMelagne/TechTchoumDocumentation',
-          label: 'GitHub',
-          position: 'right',
-        },
+        { type: 'docSidebar', sidebarId: 'tutorialSidebar', position: 'left', label: 'Documentation' },
+        { href: 'https://github.com/AntivirusMelagne/TechTchoumDocumentation', label: 'GitHub', position: 'right' },
       ],
     },
     footer: {
@@ -68,34 +63,18 @@ const config = {
       links: [
         {
           title: 'Documentation',
-          items: [
-            {
-              label: 'Introduction',
-              to: '/docs/introduction',
-            },
-          ],
+          items: [{ label: 'Introduction', to: '/docs/introduction' }],
         },
         {
           title: 'Ressources',
           items: [
-            {
-              label: 'Site officiel Next.js',
-              href: 'https://nextjs.org/docs',
-            },
-            {
-              label: 'Vercel',
-              href: 'https://vercel.com',
-            },
+            { label: 'Site officiel Next.js', href: 'https://nextjs.org/docs' },
+            { label: 'Vercel', href: 'https://vercel.com' },
           ],
         },
         {
           title: 'Suivez-moi',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/AntivirusMelagne/',
-            },
-          ],
+          items: [{ label: 'GitHub', href: 'https://github.com/AntivirusMelagne/' }],
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Ma Documentation Next.js. Fait avec ❤️ et Docusaurus.`,
