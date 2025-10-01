@@ -1,32 +1,61 @@
-name: Deploy Docusaurus to GitHub Pages
+name: Deploy Docusaurus to GitHub Pages (two repos)
 
 on:
   push:
     branches: [main]
 
 permissions:
-  contents: write   # ✅ autorise GitHub Actions à écrire dans ton dépôt
+  contents: write
 
 jobs:
-  build-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build website
-        run: npm run build
+      # ===== Build & deploy vers le dépôt ACTUEL (AntivirusMelagne) =====
+      - name: Build (current repo)
+        env:
+          SITE_URL: https://antivirusmelagne.github.io
+          BASE_URL: /TechTchoumDocumentation/
+        run: |
+          echo "Build for current repo: $SITE_URL$BASE_URL"
+          npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to current repo gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+          publish_branch: gh-pages
+
+      # ===== Re-build & deploy vers le DEUXIÈME dépôt (Rolyx) =====
+      - name: Re-build (second repo)
+        env:
+          SITE_URL: https://rolyx.github.io
+          BASE_URL: /TechTchoumDocumentation/
+        run: |
+          echo "Re-build for second repo: $SITE_URL$BASE_URL"
+          rm -rf build
+          npm run build
+
+      - name: Deploy to second repo gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.OTHER_REPO_TOKEN }}   # PAT du compte Rolyx
+          external_repository: Rolyx/TechTchoumDocumentation
+          publish_dir: ./build
+          publish_branch: gh-pages
+          user_name: github-actions[bot]
+          user_email: github-actions@users.noreply.github.com
